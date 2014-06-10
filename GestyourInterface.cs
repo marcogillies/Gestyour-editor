@@ -480,6 +480,25 @@ public class GestyourInterface : EditorWindow {
 			}
 
 			/*
+			 * Sliders for the continuous parameters
+			 */
+			EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
+			aiController.newParameterName = EditorGUILayout.TextField (aiController.newParameterName, GUILayout.Width(80));  
+			
+			// buttons for adding and removing a class name
+			if(GUILayout.Button("+", EditorStyles.miniButton, GUILayout.Width(40)))
+			{
+				aiController.AddParameter(aiController.newParameterName);
+				aiController.newParameterName = "";
+			}
+			for(int i = 0; i < aiController.parameters.Length; i++)
+			{
+				EditorGUILayout.LabelField (aiController.parameters[i].name, GUILayout.Width(40));
+				aiController.parameters[i].value = EditorGUILayout.Slider (aiController.parameters[i].value, 0, 1.0f, GUILayout.ExpandWidth(true));
+			}
+			EditorGUILayout.EndHorizontal();
+
+			/*
 			 *  Thumbnails of each of the poses in the data set
 			 */
 			GUIStyle thumbStyle = new GUIStyle();
